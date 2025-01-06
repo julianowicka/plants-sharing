@@ -1,5 +1,5 @@
 import '@/app/ui/global.css';
-import { inter } from '@/app/ui/fonts';
+import { montserrat } from '@/app/ui/fonts';
 
 
 export default function RootLayout({
@@ -9,7 +9,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-        <body className={`${inter.className} antialiased`}>{children}</body>
+      <head>
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"/>
+
+      </head>
+        <body className={`${montserrat.className} antialiased`}>{children}</body>
 
     </html>
   );

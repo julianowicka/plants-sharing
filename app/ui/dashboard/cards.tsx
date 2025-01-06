@@ -1,16 +1,13 @@
-import {
-  BanknotesIcon,
-  ClockIcon,
-  UserGroupIcon,
-  InboxIcon,
-} from '@heroicons/react/24/outline';
-import { lusitana } from '@/app/ui/fonts';
+import { montserrat } from '@/app/ui/fonts';
+import ChangeIcon from './card-item/change-icon';
+import CatalogIcon from './card-item/catalog-icon';
+import CalendarIcon from './card-item/calendar-icon';
 
 const iconMap = {
-  collected: BanknotesIcon,
-  customers: UserGroupIcon,
-  pending: ClockIcon,
-  invoices: InboxIcon,
+
+  change: ChangeIcon,
+  catalog: CatalogIcon,
+  calendar: CalendarIcon,
 };
 
 export default async function CardWrapper() {
@@ -32,27 +29,20 @@ export default async function CardWrapper() {
 
 export function Card({
   title,
-  value,
   type,
 }: {
   title: string;
-  value: number | string;
-  type: 'invoices' | 'customers' | 'pending' | 'collected';
+  type: 'change' | 'catalog' | 'calendar' ;
 }) {
   const Icon = iconMap[type];
 
   return (
-    <div className="rounded-xl bg-gray-50 p-2 shadow-sm">
-      <div className="flex p-4">
-        {Icon ? <Icon className="h-5 w-5 text-gray-700" /> : null}
-        <h3 className="ml-2 text-sm font-medium">{title}</h3>
-      </div>
-      <p
-        className={`${lusitana.className}
-          truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
-      >
-        {value}
-      </p>
-    </div>
+    <div className="w-[87.94px] h-[87px] bg-[#e8f3fb] rounded-[17.95px] flex flex-col items-center justify-center gap-2
+    shadow-[19px_21px_50px_0px_rgba(176,195,210,0.73),-8px_0px_8px_0px_rgba(244,248,251,0.50),-8px_-40px_22px_0px_rgba(246,251,255,0.38),-11px_-11px_20px_0px_rgba(255,255,255,0.27)]">
+    {Icon ? <Icon /> : null}
+    <h3 className={`${montserrat.className} text-xs font-medium text-gray-600`}>
+      {title}
+    </h3>
+  </div>
   );
 }
