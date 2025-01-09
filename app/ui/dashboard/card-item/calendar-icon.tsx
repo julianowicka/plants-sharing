@@ -26,7 +26,7 @@ export default function CalendarIcon() {
         </g>
         </g>
         <defs>
-        <filter id="filter0_dddd_0_1" x="-65.2601" y="-82" width="187.945" height="220" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <filter id="filter0_dddd_0_1" x="-65.2601" y="-82" width="187.945" height="220" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
         <feFlood floodOpacity="0" result="BackgroundImageFix"/>
         <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
         <feOffset dx="19" dy="21"/>
