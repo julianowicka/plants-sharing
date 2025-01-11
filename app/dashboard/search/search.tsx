@@ -5,6 +5,7 @@ import { IconButton, InputAdornment, styled } from "@mui/material";
 import FilterIcon from "./filter-icon";
 import SearchIcon from "./search-icon"
 import TextField from '@mui/material/TextField';
+import { inter } from "@/app/ui/fonts";
 const CustomTextField = styled(TextField)({
     '& .MuiOutlinedInput-root': {
       height: '64px',
@@ -36,14 +37,19 @@ const CustomTextField = styled(TextField)({
       }
     },
   });
-export default  function Search() {
+  interface Props {
+    value: string;
+    onChange: (value: string) => void;
+  }
+export default  function Search(props: Props) {
    
   return (
 <>
 
 <CustomTextField 
+      value={props.value}
+      onChange={(e) => props.onChange(e.target.value)}
       id="outlined-basic" 
-      label="Szukaj" 
       variant="outlined"
       sx={{
         width: '311px',

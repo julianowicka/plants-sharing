@@ -1,3 +1,4 @@
+"use client";
 import { montserrat } from '@/app/ui/fonts';
 import ChangeIcon from './card-item/change-icon';
 import CatalogIcon from './card-item/catalog-icon';

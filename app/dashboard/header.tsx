@@ -1,5 +1,5 @@
 
-export default async function Header() {
+export default function Header() {
    
   return (
     <div className="flex flex-col gap-3 px-6 pt-16">
