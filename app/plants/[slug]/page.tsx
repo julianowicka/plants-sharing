@@ -1,3 +1,5 @@
+import CustomCalendar from "./calendar";
+
 export default function PlantPage({ params }: { params: { slug: string } }) {
   const nazwa = params.slug;
   const opis = "Pieniążek lubi umiarkowane podlewanie, dobrze reaguje na delikatne zraszanie liści. Ziemia w doniczce powinna być delikatnie wilgotna. Nie należy dopuszczać do przelewania - wtedy korzenie rośliny mogą niestety zgnić a listki czernieją i odpadają. Zimą podlewanie nieco ograniczamy.";
@@ -39,6 +41,7 @@ export default function PlantPage({ params }: { params: { slug: string } }) {
               {opis}
             </p>
           </div>
+          <CustomCalendar />
         </div>
       </div>
     </div>
