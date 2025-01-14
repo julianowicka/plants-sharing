@@ -2,14 +2,36 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-const CustomCalendar = () => {
+interface Props {
+  wateringInterval: number;
+  name: string;
+}
+
+const Calendar = ({ wateringInterval: everyNDays, name }: Props) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   
+  const calculateWateringDays = (everyNDays: number): number[] => {
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth();
+    
+    // Start from January 1st
+    let startDate = new Date(currentYear, 0, 1); // January 1st
+    let wateringDays = [];
+    
+    // Calculate all watering days until we reach current month
+    while (startDate.getFullYear() === currentYear) {
+      if (startDate.getMonth() === currentMonth) {
+        wateringDays.push(startDate.getDate());
+      }
+      // Add everyNDays to get next watering date
+      startDate.setDate(startDate.getDate() + everyNDays);
+    }
+    
+    return wateringDays;
+  };
   // Przykładowe dane o podlewaniu (w praktyce będą pochodzić z props lub API)
   const wateringDays = {
-    'Monstera': [1, 15, 30], // dni miesiąca
-    'Storczyk': [5, 20],
-    'Paproć': [3, 13, 23]
+    [name]: everyNDays <= 0 ? calculateWateringDays(1) : calculateWateringDays(everyNDays)
   };
 
 interface WateringDays {
@@ -21,7 +43,7 @@ const getDaysInMonth = (date: Date): number => {
 };
 
 const getFirstDayOfMonth = (date: Date): number => {
-    return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+    return new Date(date.getFullYear(), date.getMonth(), 1).getUTCDay();
 };
 
 const changeMonth = (offset: number): void => {
@@ -33,14 +55,13 @@ const changeMonth = (offset: number): void => {
     "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"
   ];
 
-  const days = ["Nd", "Pn", "Wt", "Śr", "Cz", "Pt", "Sb"];
+  const days = ["Pn", "Wt", "Śr", "Cz", "Pt", "Sb", "Nd"];
 
   const renderCalendar = () => {
     const daysInMonth = getDaysInMonth(currentDate);
     const firstDay = getFirstDayOfMonth(currentDate);
     const days = [];
 
-    // Dodaj puste komórki na początku miesiąca
     for (let i = 0; i < firstDay; i++) {
       days.push(<div key={`empty-${i}`} className="h-12"></div>);
     }
@@ -116,4 +137,4 @@ const changeMonth = (offset: number): void => {
   );
 };
 
-export default CustomCalendar;
+export default Calendar;
