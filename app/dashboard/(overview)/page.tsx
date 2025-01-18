@@ -26,7 +26,7 @@ export default async function Page() {
     .filter(Boolean) as PlantDetailsModel[];
 
   return (
-    <div className='m-0 p-1 sm:m-4 sm:p-4  pt-10 w-[100%] '>
+    <div className='m-0 p-1 sm:p-10  pt-10 w-[100%] '>
       <Header />
       <DashboardSearch />
       <CardWrapper />

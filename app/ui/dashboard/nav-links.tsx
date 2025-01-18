@@ -10,9 +10,9 @@ import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 
 const links = [
-  { name: 'Home', href: '/dashboard', icon: HomeIcon },
+  { name: 'Pulpit', href: '/dashboard', icon: HomeIcon },
   {
-    name: 'Plants',
+    name: 'Katalog roślin',
     href: '/plants',
     icon: ListBulletIcon,
   },
@@ -21,11 +21,10 @@ const links = [
 export default function NavLinks() {
   const pathname = usePathname();
   
-  const sortedLinks = [...links].sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <>
-      {sortedLinks.map((link) => {
+      {links.map((link) => {
         const LinkIcon = link.icon;
         return (
           <Link

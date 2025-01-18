@@ -30,7 +30,7 @@ export function Card({ title, type, onClick = () => { } }: Props) {
   const Icon = iconMap[type];
 
   return (
-    <IconButton onClick={onClick} className="p-0">
+    <IconButton onClick={onClick} className="p-0" sx={{ padding: 0}}>
       <div className="w-[100px] h-[100px] bg-[#e8f3fb] rounded-[17.95px] flex flex-col items-center justify-center gap-2
     shadow-[19px_21px_50px_0px_rgba(176,195,210,0.73),-8px_0px_8px_0px_rgba(244,248,251,0.50),-8px_-40px_22px_0px_rgba(246,251,255,0.38),-11px_-11px_20px_0px_rgba(255,255,255,0.27)]">
         {Icon ? <Icon /> : null}

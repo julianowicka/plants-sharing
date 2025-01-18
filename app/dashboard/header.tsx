@@ -7,7 +7,7 @@ export default function Header() {
         Cześć Julia,
       </h1>
       <h2 className="text-[#495566] text-base font-bold font-['Montserrat'] opacity-80 pb-1">
-        Odkrywaj niezbadane rośliny
+        Odkrywaj nieznane rośliny
       </h2>
     </div>
   );
