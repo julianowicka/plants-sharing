@@ -5,7 +5,7 @@ import { IconButton, InputAdornment, styled } from "@mui/material";
 import FilterIcon from "./filter-icon";
 import SearchIcon from "./search-icon"
 import TextField from '@mui/material/TextField';
-import { inter } from "@/app/ui/fonts";
+
 const CustomTextField = styled(TextField)({
     '& .MuiOutlinedInput-root': {
       height: '64px',
@@ -30,7 +30,6 @@ const CustomTextField = styled(TextField)({
       color: '#a5e7df',
     },
     '& .MuiOutlinedInput-input': {
-      color: '#a5e7df',
       '&::placeholder': {
         color: '#a5e7df',
         opacity: 1,
@@ -52,8 +51,9 @@ export default  function Search(props: Props) {
       id="outlined-basic" 
       variant="outlined"
       sx={{
-        width: '311px',
+        width: '350px',
         height: '48px',
+        maxWidth: '100%',
       }}
       InputProps={{
         startAdornment: (

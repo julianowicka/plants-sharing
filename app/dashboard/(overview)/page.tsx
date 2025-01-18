@@ -5,27 +5,25 @@ import CardWrapper from '../cards-wrapper';
 import Header from '../header';
 import Search from '../search/search';
 import Collection from '@/app/ui/dashboard/collection';
- 
+
 export default function Page() {
 
   const [plantName, setPlantName] = useState('');
-  
+
   const handleChange = (value: string) => {
     setPlantName(value);
-    console.log("value",value);
-    console.log("plantName",plantName);
-   
+    console.log("value", value);
+    console.log("plantName", plantName);
+
   }
   return (
-    <main>
+    <div className='m-6 p-6 pt-10'>
       <Header />
       <Search value={plantName} onChange={handleChange} />
-      <Suspense fallback={<CardSkeleton />}>
-        <CardWrapper />
-      </Suspense>
-      <div className="p-4">
-      <Collection />
+      <CardWrapper />
+      <div className="pt-14">
+        <Collection />
+      </div>
     </div>
-    </main>
   );
 }

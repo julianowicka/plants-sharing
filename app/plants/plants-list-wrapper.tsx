@@ -65,6 +65,7 @@ export const PlantsListWrapper = ({ plants }: Props) => {
     return (
         <>
             <Search value={plantName} onChange={handleChange} />
+            <div className="mt-6 pt-3" />
 
             {
                 plantsForLetter.map((plantsForLetter: PlantsForLetter) => (
