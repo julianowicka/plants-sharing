@@ -17,11 +17,11 @@ export default function RootLayout({
 
       </head>
         <body className={`${montserrat.className} antialiased`}>
-           <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
+           <div className="flex h-screen flex-col md:flex-row md:overflow-y-hidden w-full">
                 <div className="w-full flex-none md:w-64">
                   <SideNav />
                 </div>
-                <div className="flex-grow">{children}</div>
+                <div className="flex-1 overflow-auto">{children}</div>
               </div>
         </body>
 

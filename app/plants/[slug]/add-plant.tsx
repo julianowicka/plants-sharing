@@ -4,13 +4,17 @@ import { Alert, Snackbar } from "@mui/material";
 import { useState } from "react";
 
 interface Props {
-    handleAddPlant: () => Promise<void>;
+    handleAddPlant: (() => Promise<void>) | undefined;
 }
 
 export default function AddPlant(props: Props) {
     const { handleAddPlant } = props;
 
     const [open, setOpen] = useState(false);
+
+    if (!handleAddPlant) {
+        return null;
+    }
 
     const handleClick = async () => {
         await handleAddPlant();

@@ -22,10 +22,10 @@ model Plant {
 
 model UserPlant {
   id      Int    @id @default(autoincrement())
-  user    User?  @relation(fields: [userId], references: [id])
-  userId  Int?
-  plant   Plant? @relation(fields: [plantId], references: [id])
-  plantId Int?
+  user    User  @relation(fields: [userId], references: [id])
+  userId  Int
+  plant   Plant @relation(fields: [plantId], references: [id])
+  plantId Int
 }
 
 model User {

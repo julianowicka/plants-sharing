@@ -7,6 +7,8 @@ import { Navigation } from 'swiper/modules';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { PlantDetailsModel } from "../plant-details-model";
+import Link from "next/link";
 
 interface CollectionCardProps {
   userImage?: string;
@@ -14,86 +16,73 @@ interface CollectionCardProps {
   plantName: string;
 }
 
-function CollectionCard({ userImage, defaultImage, plantName }: CollectionCardProps) {
+function CollectionCard({
+  userImage,
+  defaultImage,
+  plantName,
+}: CollectionCardProps) {
   const imageToShow = userImage || defaultImage;
 
   return (
-    <div className="w-[213px] h-[250px] relative overflow-hidden">
-      {/* Container  gradient background */}
-      <div className="w-[213px] h-[232.21px] left-0 top-[17.79px] absolute 
-        bg-gradient-to-br from-[#dde4ef] to-[#dde4ef] rounded-xl 
-        shadow-[4px_4px_10px_0px_rgba(221,228,239,1.00),-4px_-6px_10px_0px_rgba(255,255,255,1.00),inset_1px_1px_5px_0px_rgba(255,255,255,0.50),inset_-2px_-2px_3px_0px_rgba(221,228,239,0.50)]" 
-      />
-
-      {/* Inner container with image */}
-      <div className="w-[190.80px] h-[207.76px] left-[11.10px] top-[25.62px] absolute 
-        bg-[#f4faff] rounded-xl 
-        shadow-[4px_4px_10px_0px_rgba(221,228,239,1.00),-4px_-6px_10px_0px_rgba(255,255,255,1.00),inset_1px_1px_5px_0px_rgba(255,255,255,0.50),inset_-2px_-2px_3px_0px_rgba(221,228,239,0.50)]"
-      >
-        <img 
+    <div
+      className="
+        w-[300px]
+        rounded-md
+        border border-gray-300
+        bg-white     
+        overflow-hidden
+        shadow-sm    
+      "
+    >
+      {/* Top section with the image */}
+      <div className="w-[300px] h-[300px] bg-gray-50 flex items-center justify-center overflow-hidden">
+        <img
           src={imageToShow}
-          alt={`Roślina: ${plantName}`}
-          className="w-full h-full object-cover rounded-xl"
+          alt={plantName}
+          className="object-cover"
         />
       </div>
 
-      {/* Bg decorative element */}
-      <div className="w-[213px] h-[231.30px] left-[-12.49px] top-0 absolute rounded-lg" />
+      {/* Plant name area */}
+      <div className="p-2 text-center text-gray-700 font-medium">
+        {plantName}
+      </div>
     </div>
   );
 }
 
-export default function Collection() {
-  const plants = [
-    {
-      plantName: "Monstera",
-      defaultImage: "/collection-assets/fikus.png",
-      userImage: undefined
-    },
-    {
-      plantName: "Fikus",
-      defaultImage: "/collection-assets/2.png",
-      userImage: undefined
-    },
-  ];
+interface Props {
+  plants: PlantDetailsModel[] | null;
+}
+
+export default function Collection({ plants }: Props) {
+
+  if (!plants) {
+    return null;
+  }
 
   return (
     <div className="flex flex-col gap-6">
       <h2 className={`${montserrat.className} text-[#364459] text-[17px] font-bold`}>
         Twoja kolekcja
       </h2>
-      
+
       <Swiper
         modules={[Navigation]}
-        spaceBetween={24}
+        spaceBetween={20}
+        slidesPerView="auto"
         navigation
-        breakpoints={{
-          320: {
-            slidesPerView: 1,
-            spaceBetween: 20
-          },
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 20
-          },
-          768: {
-            slidesPerView: 3,
-            spaceBetween: 24
-          },
-          1024: {
-            slidesPerView: 4,
-            spaceBetween: 24
-          }
-        }}
-        className="w-full"
+        className="w-[100%]"
       >
         {plants.map((plant, index) => (
-          <SwiperSlide key={index}>
-            <CollectionCard
-              userImage={plant.userImage}
-              defaultImage={plant.defaultImage}
-              plantName={plant.plantName}
-            />
+          <SwiperSlide key={index} style={{ width: '300px' }}>
+            <Link href={`/my-plants/${plant.id}`}>
+              <CollectionCard
+                userImage={plant.imageSrc}
+                defaultImage={plant.imageSrc}
+                plantName={plant.name}
+              />
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>

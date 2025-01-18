@@ -1,28 +1,34 @@
-'use client';
-import { Suspense, useState } from 'react';
-import { CardSkeleton } from '@/app/ui/skeletons';
 import CardWrapper from '../cards-wrapper';
 import Header from '../header';
-import Search from '../search/search';
 import Collection from '@/app/ui/dashboard/collection';
+import { db } from '@/app/db';
+import { DashboardSearch } from './dasboard-search';
+import { PlantDetailsModel } from '@/app/ui/plant-details-model';
 
-export default function Page() {
+export default async function Page() {
 
-  const [plantName, setPlantName] = useState('');
+  const myCollection: PlantDetailsModel[] = (await db.userPlant.findMany({
+    where: { userId: 1 },
+    include: {
+      plant: {
+        select: {
+          imageSrc: true,
+          name: true,
+          id: true,
+        }
+      }
+    },
+  }))
+    .map(({ plant, id }) => ({ ...plant, id }))
+    .filter(Boolean) as PlantDetailsModel[];
 
-  const handleChange = (value: string) => {
-    setPlantName(value);
-    console.log("value", value);
-    console.log("plantName", plantName);
-
-  }
   return (
-    <div className='m-6 p-6 pt-10'>
+    <div className='m-0 p-1 sm:m-4 sm:p-4  pt-10 w-[100%] '>
       <Header />
-      <Search value={plantName} onChange={handleChange} />
+      <DashboardSearch />
       <CardWrapper />
       <div className="pt-14">
-        <Collection />
+        <Collection plants={myCollection} />
       </div>
     </div>
   );
