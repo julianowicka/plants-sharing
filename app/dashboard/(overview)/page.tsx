@@ -18,8 +18,11 @@ export default async function Page() {
         }
       }
     },
+    orderBy: {
+      id: 'desc',
+    }
   }))
-    .map(({ plant, id }) => ({ ...plant, id }))
+    .map(({ plant, id, image }) => ({ ...plant, id, image }))
     .filter(Boolean) as PlantDetailsModel[];
 
   return (

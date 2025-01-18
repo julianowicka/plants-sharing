@@ -26,6 +26,7 @@ model UserPlant {
   userId  Int
   plant   Plant @relation(fields: [plantId], references: [id])
   plantId Int
+  image   Bytes?
 }
 
 model User {

@@ -7,4 +7,5 @@ export interface PlantDetailsModel {
     soilType: string;
     lightExposure: string;
     wateringInterval: number;
+    image?: Uint8Array<ArrayBufferLike> | null;
 }

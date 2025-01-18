@@ -9,17 +9,20 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { PlantDetailsModel } from "../plant-details-model";
 import Link from "next/link";
+import { ByteOrUrlImage } from "@/app/plants/[slug]/byte-or-url-image";
 
 interface CollectionCardProps {
   userImage?: string;
   defaultImage: string;
   plantName: string;
+  imageBytes?: Uint8Array<ArrayBufferLike> | null;
 }
 
 function CollectionCard({
   userImage,
   defaultImage,
   plantName,
+  imageBytes,
 }: CollectionCardProps) {
   const imageToShow = userImage || defaultImage;
 
@@ -36,8 +39,9 @@ function CollectionCard({
     >
       {/* Top section with the image */}
       <div className="w-[300px] h-[300px] bg-gray-50 flex items-center justify-center overflow-hidden">
-        <img
-          src={imageToShow}
+        <ByteOrUrlImage
+          url={imageToShow}
+          imageBytes={imageBytes}
           alt={plantName}
           className="object-cover"
         />
@@ -81,6 +85,7 @@ export default function Collection({ plants }: Props) {
                 userImage={plant.imageSrc}
                 defaultImage={plant.imageSrc}
                 plantName={plant.name}
+                imageBytes={plant.image}
               />
             </Link>
           </SwiperSlide>
