@@ -44,7 +44,7 @@ export default async function PlantPage({ params }: { params: Promise<{ slug: st
         "use server";
         await db.comment.create({
             data: {
-                userId: 1, // Replace with the authenticated user's ID
+                userId: 1,
                 userPlantId: userPlant.id,
                 text: comment,
             },
