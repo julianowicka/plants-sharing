@@ -8,7 +8,7 @@ export default function CardWrapper() {
       <Link href="/exchange" className="flex justify-center" >
         <Card title="Wymień" type="change" />
       </Link>
-      <Link href="/catalog" className="flex justify-center" >
+      <Link href="/plants" className="flex justify-center" >
         <Card title="Katalog" type="catalog" />
       </Link>
       <Link href="/calendar" className="flex justify-center" >

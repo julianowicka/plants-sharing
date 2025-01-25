@@ -4,30 +4,25 @@ import { PlantDetailsModel } from "@/app/ui/plant-details-model";
 import AddPlant from "./add-plant";
 import Calendar from "./calendar";
 import { EditImage } from "./edit-image-component";
-import { useEffect, useState } from "react";
 import { ByteOrUrlImage } from "./byte-or-url-image";
+import { DisplayComments } from "./display-comments";
+import { Comment } from "./comment-model";
+import { ExchangePlantButton } from "./exchange-plant-button";
 
 interface Props {
     handleAddPlant?: () => Promise<void>;
     onImageUpload?: ((image: File) => Promise<void>) | undefined;
     imageBytes?: Uint8Array<ArrayBufferLike> | null;
     plant: PlantDetailsModel;
+    handleAddComment?: (comment: string) => Promise<void>;
+    comments?: Comment[];
+    handleExchangePlant?: (phone: string) => Promise<void>;
+    isOfferedForExchange?: boolean;
 }
 
 export const PlantDetailsComponent = (props: Props) => {
-    const { handleAddPlant, plant, onImageUpload, imageBytes } = props;
+    const { handleAddPlant, plant, onImageUpload, imageBytes, isOfferedForExchange = false } = props;
     const { name, description, imageSrc, difficulty, soilType, lightExposure, wateringInterval } = plant;
-
-    const [blobUrl, setBlobUrl] = useState<null | string>(null);
-
-    useEffect(() => {
-      if (imageBytes) {
-        const blob = new Blob([imageBytes], { type: "image/png" });
-        const url = URL.createObjectURL(blob);
-        setBlobUrl(url);
-        return () => URL.revokeObjectURL(url);
-      }
-    }, [imageBytes]);
 
     return (
         // scrollable container
@@ -37,6 +32,7 @@ export const PlantDetailsComponent = (props: Props) => {
             <ByteOrUrlImage url={imageSrc} imageBytes={imageBytes} className="w-full h-[500px] max-h-[40vh] object-cover" alt={name} />
             <div className="absolute left-0 bottom-0 m-4">
               <AddPlant handleAddPlant={handleAddPlant} />
+              <ExchangePlantButton handleExchangePlant={props.handleExchangePlant} isOfferedForExchange={isOfferedForExchange} />
             </div>
             <EditImage onUpload={onImageUpload} />
           </div>
@@ -69,6 +65,7 @@ export const PlantDetailsComponent = (props: Props) => {
               <div className="mt-[34px]" />
               <h2 className="font-bold">Kalendarz Podlewania</h2>
               <Calendar wateringInterval={wateringInterval} name={name} />
+              <DisplayComments handleAddComment={props.handleAddComment} comments={props.comments} />
               <div className="pt-[100px]" />
             </div>
           </div>

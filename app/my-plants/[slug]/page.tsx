@@ -10,10 +10,18 @@ export default async function PlantPage({ params }: { params: Promise<{ slug: st
         where: { id: plantId },
         include: {
             plant: true,
+            comments: {
+                include: {
+                    user: {
+                        select: {
+                            name: true,
+                        },
+                    },
+                }
+            },
+            exchangeOffers: true,
         },
     });
-
-    console.log("User plant", userPlant);
 
     if (!userPlant) {
         return <div>Plant not found</div>;
@@ -32,11 +40,42 @@ export default async function PlantPage({ params }: { params: Promise<{ slug: st
         redirect(`/my-plants/${plantId}`);
     }
 
+    const handleAddComment = async (comment: string) => {
+        "use server";
+        await db.comment.create({
+            data: {
+                userId: 1, // Replace with the authenticated user's ID
+                userPlantId: userPlant.id,
+                text: comment,
+            },
+        });
+    }
+
+    const isOfferedForExchange = userPlant.exchangeOffers.length > 0;
+
+    const handleExchangePlant = async (phone: string) => {
+        "use server";
+        if (isOfferedForExchange) {
+            throw new Error("Ta roślina jest już wystawiona do wymiany");
+        }
+
+        await db.exchangeOffer.create({
+            data: {
+                userPlantId: plantId,
+                phone,
+            },
+        });
+    }
+
     return (
         <PlantDetailsComponent
             plant={userPlant.plant}
             onImageUpload={handleImageUpload}
             imageBytes={userPlant.image}
+            comments={userPlant.comments}
+            handleAddComment={handleAddComment}
+            handleExchangePlant={handleExchangePlant}
+            isOfferedForExchange={isOfferedForExchange}
         />
     );
 }

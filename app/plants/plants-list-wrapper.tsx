@@ -1,8 +1,10 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Search from "../dashboard/search/search";
 import { PlantBasicInfoModel } from "./plants-basic-info-model";
 import PlantsList from "./plants-list";
+import { useRouter } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
 
 interface PlantsForLetter {
     letter: string;
@@ -10,21 +12,26 @@ interface PlantsForLetter {
 }
 
 interface Props {
-    plants: PlantBasicInfoModel[]
+    allPlants: PlantBasicInfoModel[];
+    filteredPlants: PlantBasicInfoModel[];
+    plantNameFilter: string;
 }
 
-export const PlantsListWrapper = ({ plants }: Props) => {
-    const [plantName, setPlantName] = useState('');
+export const PlantsListWrapper = ({ allPlants, filteredPlants, plantNameFilter }: Props) => {
+    const [plantName, setPlantName] = useState(plantNameFilter);
+    const [filteredPlantsList, setFilteredPlantsList] = useState(filteredPlants);
 
     const handleChange = (value: string) => {
         setPlantName(value);
-        console.log("value", value);
-        console.log("plantName", plantName);
     }
+
+    useEffect(() => {
+        setFilteredPlantsList(allPlants.filter(plant => plant.name.toLocaleUpperCase().includes(plantName.toLocaleUpperCase())));
+    }, [plantName, allPlants]);
 
     const plantsForLetter = useMemo(() => {
         const result: PlantsForLetter[] = [];
-        const sortedPlants = plants.sort((a, b) => a.name.localeCompare(b.name));
+        const sortedPlants = filteredPlantsList.sort((a, b) => a.name.localeCompare(b.name));
         let currentLetter = '';
         let currentPlantsList: PlantBasicInfoModel[] = [];
         const firstPlant = sortedPlants[0];
@@ -34,9 +41,6 @@ export const PlantsListWrapper = ({ plants }: Props) => {
         currentLetter = firstPlant.name.charAt(0).toUpperCase();
         for(let i = 0; i < sortedPlants.length; i++) {
             const plant = sortedPlants[i];
-            if (!plant.name.toLocaleUpperCase().includes(plantName.toLocaleUpperCase())) {
-                continue;
-            }
             if (plant.name.charAt(0).toUpperCase() === currentLetter) {
                 currentPlantsList.push(plant);
             } else {
@@ -58,7 +62,7 @@ export const PlantsListWrapper = ({ plants }: Props) => {
         return result;
 
         
-    }, [plantName])
+    }, [plantName, filteredPlantsList]);
 
     console.log("plantsForLetter", plantsForLetter);
 

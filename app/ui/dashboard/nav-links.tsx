@@ -8,6 +8,7 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
+import { Refresh } from '@mui/icons-material';
 
 const links = [
   { name: 'Pulpit', href: '/dashboard', icon: HomeIcon },
@@ -16,6 +17,11 @@ const links = [
     href: '/plants',
     icon: ListBulletIcon,
   },
+  {
+    name: "Wymiana",
+    href: "/exchange",
+    icon: Refresh,
+  }
 ];
 
 export default function NavLinks() {

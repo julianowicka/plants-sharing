@@ -1,6 +1,4 @@
 import { db } from "@/app/db";
-import Calendar from "./calendar";
-import AddPlant from "./add-plant";
 import { PlantDetailsComponent } from "./plant-details-component";
 
 export default async function PlantPage({ params }: { params: Promise<{ slug: string }> }) {
