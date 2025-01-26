@@ -1,9 +1,9 @@
 'use client';
 
 import {
-  UserGroupIcon,
   HomeIcon,
   ListBulletIcon,
+  CalendarIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -21,6 +21,11 @@ const links = [
     name: "Wymiana",
     href: "/exchange",
     icon: Refresh,
+  },
+  {
+    name: 'Kalendarz',
+    href: '/calendar',
+    icon: CalendarIcon,
   }
 ];
 
