@@ -43,14 +43,14 @@ model Comment {
   id          Int       @id @default(autoincrement())
   user        User      @relation(fields: [userId], references: [id])
   userId      Int
-  userPlant   UserPlant @relation(fields: [userPlantId], references: [id])
+  userPlant   UserPlant @relation(fields: [userPlantId], references: [id], onDelete: Cascade)
   userPlantId Int
   text        String
 }
 
 model ExchangeOffer {
   id          Int       @id @default(autoincrement())
-  userPlant   UserPlant @relation(fields: [userPlantId], references: [id])
+  userPlant   UserPlant @relation(fields: [userPlantId], references: [id], onDelete: Cascade)
   userPlantId Int
   phone       String
 }

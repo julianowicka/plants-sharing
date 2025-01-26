@@ -1,7 +1,8 @@
+import { Typography } from "@mui/material";
 import { db } from "../db";
+import { PlantsListWrapper } from "../plants/plants-list-wrapper";
 
 export default async function CalendarPage() {
-
 
     const offers = await db.exchangeOffer.findMany({
         include: {
@@ -13,17 +14,13 @@ export default async function CalendarPage() {
         }
     });
 
+    const plants = offers.map(offer => ({ ...offer.userPlant.plant, id: offer.userPlant.id }));
+
     return (
         <div className="m-6 p-6">
-            <h1>Rośliny wystawione do wymiany przez innych użytkowników: </h1>
+            <Typography variant="h4" className="text-bold">Rośliny wystawione do wymiany przez innych użytkowników: </Typography>
             <br />
-            <ul>
-                {offers?.map(offer => (
-                    <li key={offer.id}>
-                        - {offer.userPlant.plant.name}
-                    </li>
-                ))}
-            </ul>
+            <PlantsListWrapper allPlants={plants} plantNameFilter={''} filteredPlants={plants} isMyPlant={true} />
         </div>
     );
 }

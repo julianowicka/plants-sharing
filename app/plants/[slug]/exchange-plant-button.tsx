@@ -39,6 +39,11 @@ export const ExchangePlantButton = ({ handleExchangePlant, isOfferedForExchange 
     const handleExchange = async () => {
         if (!handleExchangePlant) return;
 
+        if (!phone || !/^\d{9}$/.test(phone)) {
+            setError("Telefon musi mieć dokładnie 9 cyfr. Podaj poprawny numer telefonu");
+            return;
+        }
+
         try {
             await handleExchangePlant(phone);
             handleCloseModal();

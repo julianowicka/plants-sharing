@@ -52,6 +52,9 @@ export default async function PlantPage({ params }: { params: Promise<{ slug: st
     }
 
     const isOfferedForExchange = userPlant.exchangeOffers.length > 0;
+    const exchangeOffer = userPlant.exchangeOffers[0] ?? {};
+    const exchangePhone = exchangeOffer.phone;
+
 
     const handleExchangePlant = async (phone: string) => {
         "use server";
@@ -67,6 +70,14 @@ export default async function PlantPage({ params }: { params: Promise<{ slug: st
         });
     }
 
+    const handleRemoveUserPlant = async () => {
+        "use server";
+        await db.userPlant.delete({
+            where: { id: plantId },
+        });
+        redirect("/dashboard");
+    }
+
     return (
         <PlantDetailsComponent
             plant={userPlant.plant}
@@ -76,6 +87,8 @@ export default async function PlantPage({ params }: { params: Promise<{ slug: st
             handleAddComment={handleAddComment}
             handleExchangePlant={handleExchangePlant}
             isOfferedForExchange={isOfferedForExchange}
+            phone={exchangePhone}
+            handleRemovePlant={handleRemoveUserPlant}
         />
     );
 }

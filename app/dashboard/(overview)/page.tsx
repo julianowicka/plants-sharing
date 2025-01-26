@@ -31,7 +31,7 @@ export default async function Page() {
       <DashboardSearch />
       <CardWrapper />
       <div className="pt-14">
-        <Collection plants={myCollection} />
+        <Collection plants={myCollection} title='Twoja kolekcja' />
       </div>
     </div>
   );

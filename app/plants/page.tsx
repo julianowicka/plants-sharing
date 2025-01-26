@@ -16,7 +16,7 @@ export default async function PlantsPage({
   
     return (
       <div className="m-6 p-6">
-        <PlantsListWrapper allPlants={plants} plantNameFilter={plantName} filteredPlants={filteredPlants} />
+        <PlantsListWrapper allPlants={plants} plantNameFilter={plantName} filteredPlants={filteredPlants} isMyPlant={false} />
       </div>
     );
 }

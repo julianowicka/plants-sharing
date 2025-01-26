@@ -3,8 +3,6 @@ import { useEffect, useMemo, useState } from "react";
 import Search from "../dashboard/search/search";
 import { PlantBasicInfoModel } from "./plants-basic-info-model";
 import PlantsList from "./plants-list";
-import { useRouter } from "next/navigation";
-import { useDebouncedCallback } from "use-debounce";
 
 interface PlantsForLetter {
     letter: string;
@@ -15,9 +13,11 @@ interface Props {
     allPlants: PlantBasicInfoModel[];
     filteredPlants: PlantBasicInfoModel[];
     plantNameFilter: string;
+    isMyPlant: boolean;
 }
 
-export const PlantsListWrapper = ({ allPlants, filteredPlants, plantNameFilter }: Props) => {
+export const PlantsListWrapper = (props: Props) => {
+    const { allPlants, filteredPlants, plantNameFilter, isMyPlant } = props;
     const [plantName, setPlantName] = useState(plantNameFilter);
     const [filteredPlantsList, setFilteredPlantsList] = useState(filteredPlants);
 
@@ -64,18 +64,16 @@ export const PlantsListWrapper = ({ allPlants, filteredPlants, plantNameFilter }
         
     }, [plantName, filteredPlantsList]);
 
-    console.log("plantsForLetter", plantsForLetter);
 
     return (
         <>
             <Search value={plantName} onChange={handleChange} />
             <div className="mt-6 pt-3" />
-
             {
                 plantsForLetter.map((plantsForLetter: PlantsForLetter) => (
                     <div key={plantsForLetter.letter} className="w-full">
                         <p className="pt-2">{plantsForLetter.letter}</p>
-                        <PlantsList plants={plantsForLetter.plants} />
+                        <PlantsList plants={plantsForLetter.plants} isMyPlant={isMyPlant} />
                     </div>
                 ))
             }

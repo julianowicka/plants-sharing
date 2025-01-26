@@ -57,9 +57,10 @@ function CollectionCard({
 
 interface Props {
   plants: PlantDetailsModel[] | null;
+  title: string;
 }
 
-export default function Collection({ plants }: Props) {
+export default function Collection({ plants, title }: Props) {
 
   if (!plants) {
     return null;
@@ -68,7 +69,7 @@ export default function Collection({ plants }: Props) {
   return (
     <div className="flex flex-col gap-6">
       <h2 className={`${montserrat.className} text-[#364459] text-[17px] font-bold`}>
-        Twoja kolekcja
+        {title}
       </h2>
 
       <Swiper
