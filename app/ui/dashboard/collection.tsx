@@ -9,7 +9,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { PlantDetailsModel } from "../plant-details-model";
 import Link from "next/link";
-import { ByteOrUrlImage } from "@/app/plants/[slug]/byte-or-url-image";
+import { ByteOrUrlImage } from "@/app/(protected)/plants/[slug]/byte-or-url-image";
 
 interface CollectionCardProps {
   userImage?: string;

@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link";
-import { Card } from "../ui/dashboard/cards";
+import { Card } from "../../ui/dashboard/cards";
 
 export default function CardWrapper() {
   return (

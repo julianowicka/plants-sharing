@@ -1,11 +1,11 @@
 "use client";
 
 import { Divider, IconButton, Typography } from "@mui/material";
-import { PlantDetailsModel } from "../ui/plant-details-model";
-import Collection from "../ui/dashboard/collection";
-import { useState } from "react";
+import { PlantDetailsModel } from "../../ui/plant-details-model";
+import Collection from "../../ui/dashboard/collection";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
+
 
 const calculateDayNumberInYear = (date: Date): number => {
     const start = new Date(date.getFullYear(), 0, 0);
@@ -28,12 +28,6 @@ export default function CalendarPageBody(props: Props) {
     const { myCollection, currentDate } = props;
 
     const router = useRouter();
-
-    // first january 2025
-    const testDate = new Date(2025, 0, 1);
-
-    // @ts-ignore
-    window.day = calculateDayNumberInYear;
 
     const plantsToWater = myCollection.filter(plant => shouldWaterToday(currentDate, plant.wateringInterval));
     const dateFormatted = currentDate.toLocaleDateString().padStart(10, "0");

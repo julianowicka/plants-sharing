@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import { db } from "../db";
+import { db } from "../../db";
 import { PlantsListWrapper } from "../plants/plants-list-wrapper";
 
 export default async function CalendarPage() {

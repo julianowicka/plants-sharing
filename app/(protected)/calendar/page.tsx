@@ -1,5 +1,5 @@
-import { db } from "../db";
-import { PlantDetailsModel } from "../ui/plant-details-model";
+import { db } from "../../db";
+import { PlantDetailsModel } from "../../ui/plant-details-model";
 import CalendarPageBody from "./calendar-page-body";
 
 interface CalendarPageProps {

@@ -1,5 +1,5 @@
 import { db } from "@/app/db";
-import { PlantDetailsComponent } from "@/app/plants/[slug]/plant-details-component";
+import { PlantDetailsComponent } from "@/app/(protected)/plants/[slug]/plant-details-component";
 import { redirect } from "next/navigation";
 
 export default async function PlantPage({ params }: { params: Promise<{ slug: string }> }) {

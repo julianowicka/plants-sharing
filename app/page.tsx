@@ -1,4 +1,4 @@
-import Page from './dashboard/(overview)/page';
+import Page from './(protected)/dashboard/(overview)/page';
 
 
 
