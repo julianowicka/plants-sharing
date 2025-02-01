@@ -1,9 +1,18 @@
-import Page from './(protected)/dashboard/(overview)/page';
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 
 
 export default function PageMain() {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push("/dashboard");
+  });
+
   return (
-    <Page />
+    <html><head></head><body></body></html>
   );
 }

@@ -1,10 +1,12 @@
 import { db } from "@/app/db";
 import { PlantDetailsComponent } from "@/app/(protected)/plants/[slug]/plant-details-component";
 import { redirect } from "next/navigation";
+import { getUserId } from "../../dashboard/(overview)/getUserId";
 
 export default async function PlantPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
     const plantId = Number(slug)
+    const userId = await getUserId();
 
     const userPlant = await db.userPlant.findUnique({
         where: { id: plantId },
@@ -44,7 +46,7 @@ export default async function PlantPage({ params }: { params: Promise<{ slug: st
         "use server";
         await db.comment.create({
             data: {
-                userId: 1,
+                userId,
                 userPlantId: userPlant.id,
                 text: comment,
             },
@@ -54,7 +56,7 @@ export default async function PlantPage({ params }: { params: Promise<{ slug: st
     const isOfferedForExchange = userPlant.exchangeOffers.length > 0;
     const exchangeOffer = userPlant.exchangeOffers[0] ?? {};
     const exchangePhone = exchangeOffer.phone;
-
+    const isMyPlant = userPlant.userId === userId;
 
     const handleExchangePlant = async (phone: string) => {
         "use server";
@@ -78,6 +80,10 @@ export default async function PlantPage({ params }: { params: Promise<{ slug: st
         redirect("/dashboard");
     }
 
+    if (!isMyPlant && !isOfferedForExchange) {
+        return <div>Brak dostępu</div>
+    }
+
     return (
         <PlantDetailsComponent
             plant={userPlant.plant}
@@ -89,6 +95,7 @@ export default async function PlantPage({ params }: { params: Promise<{ slug: st
             isOfferedForExchange={isOfferedForExchange}
             phone={exchangePhone}
             handleRemovePlant={handleRemoveUserPlant}
+            isMyPlant={isMyPlant}
         />
     );
 }

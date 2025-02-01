@@ -1,9 +1,11 @@
 import { db } from "@/app/db";
 import { PlantDetailsComponent } from "./plant-details-component";
+import { getUserId } from "../../dashboard/(overview)/getUserId";
 
 export default async function PlantPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const flower = await db.plant.findUnique({ where: { slug } })
+  const userId = await getUserId();
 
   if (!flower) {
     return <div>Plant not found</div>;
@@ -15,7 +17,7 @@ export default async function PlantPage({ params }: { params: Promise<{ slug: st
       "use server";
       await db.userPlant.create({
           data: {
-              userId: 1, // Replace with the authenticated user's ID
+              userId,
               plantId: id,
           },
       });

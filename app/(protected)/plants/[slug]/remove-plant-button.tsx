@@ -2,12 +2,15 @@ import { Button } from "@mui/material";
 
 interface Props {
     handleRemovePlant?: (() => Promise<void>) | undefined;
+    isMyPlant?: boolean;
 }
 
 export const RemovePlantButton = (props: Props) => {
-    const { handleRemovePlant } = props;
+    const { handleRemovePlant, isMyPlant } = props;
 
-    if (!handleRemovePlant) {
+    console.log("isMyPlant", isMyPlant)
+
+    if (!handleRemovePlant || !isMyPlant) {
         return null;
     }
 

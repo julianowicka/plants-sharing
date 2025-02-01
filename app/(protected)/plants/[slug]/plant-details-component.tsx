@@ -22,10 +22,21 @@ interface Props {
   isOfferedForExchange?: boolean;
   phone?: string;
   handleRemovePlant?: () => Promise<void>;
+  isMyPlant?: boolean;
 }
 
 export const PlantDetailsComponent = (props: Props) => {
-  const { handleAddPlant, plant, onImageUpload, imageBytes, isOfferedForExchange = false, phone, handleRemovePlant } = props;
+  const {
+    handleAddPlant,
+    plant,
+    onImageUpload,
+    imageBytes,
+    isOfferedForExchange = false,
+    phone,
+    handleRemovePlant,
+    isMyPlant = true,
+  } = props;
+
   const { name, description, imageSrc, difficulty, soilType, lightExposure, wateringInterval } = plant;
 
   return (
@@ -34,12 +45,12 @@ export const PlantDetailsComponent = (props: Props) => {
       {/* Image section */}
       <div className="w-full h-[500px] max-h-[40vh] relative">
         <ByteOrUrlImage url={imageSrc} imageBytes={imageBytes} className="w-full h-[500px] max-h-[40vh] object-cover" alt={name} />
-        <RemovePlantButton handleRemovePlant={handleRemovePlant} />
+        <RemovePlantButton handleRemovePlant={handleRemovePlant} isMyPlant={isMyPlant} />
         <div className="absolute left-0 bottom-0 m-4">
           <AddPlant handleAddPlant={handleAddPlant} />
           <ExchangePlantButton handleExchangePlant={props.handleExchangePlant} isOfferedForExchange={isOfferedForExchange} />
         </div>
-        <EditImage onUpload={onImageUpload} />
+        <EditImage onUpload={onImageUpload} isMyPlant={isMyPlant} />
       </div>
 
       {/* Content section */}

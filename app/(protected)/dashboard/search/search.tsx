@@ -62,13 +62,6 @@ export default function Search(props: Props) {
               </IconButton>
             </InputAdornment>
           ),
-          endAdornment: (
-            <InputAdornment position="end" sx={{ width: "50px" }}>
-              <IconButton>
-                <FilterIcon />
-              </IconButton>
-            </InputAdornment>
-          ),
         }}
       />
     </div>

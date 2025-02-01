@@ -7,9 +7,10 @@ import { CameraAlt } from "@mui/icons-material";
 
 interface EditImageProps {
     onUpload: ((file: File) => Promise<void>) | undefined;
+    isMyPlant?: boolean;
 }
 
-export function EditImage({ onUpload }: EditImageProps) {
+export function EditImage({ onUpload, isMyPlant }: EditImageProps) {
 
     const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files?.[0]) {
@@ -20,7 +21,7 @@ export function EditImage({ onUpload }: EditImageProps) {
         await onUpload?.(file);
     };
 
-    if (!onUpload) {
+    if (!onUpload || !isMyPlant) {
         return null;
     }
 
