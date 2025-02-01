@@ -54,14 +54,14 @@ export default function CalendarPageBody(props: Props) {
                 <IconButton sx={{ border: "1px solid" }} onClick={handlePreviousDay} aria-label="Poprzedni dzień">
                     <KeyboardArrowLeft fontSize="large" />
                 </IconButton>
-                <Typography sx={{ width: "100vw", maxWidth: 1000, textAlign: "center" }} variant="h1">{dateFormatted}</Typography>
+                <Typography sx={{ width: "100vw", maxWidth: 1000, textAlign: "center" }} variant="h5">{dateFormatted}</Typography>
                 <IconButton sx={{ border: "1px solid" }} onClick={handleNextDay} aria-label="Następny dzień">
                     <KeyboardArrowRight fontSize="large" />
                 </IconButton>
             </div>
-            <Divider />
+            <Divider className="pt-2" />
             <br /><br />
-            <Typography variant="h3">Dzisiaj podlej:</Typography>
+            <Typography variant="h5">Dzisiaj podlej:</Typography>
             <div className="pt-14">
                 <Collection plants={plantsToWater} title="" />
             </div>
