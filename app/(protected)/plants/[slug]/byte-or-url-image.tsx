@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 interface Props {
-    imageBytes?: Uint8Array<ArrayBufferLike> | null;
+    imageBytes?: Uint8Array | null;
     url: string;
     className?: string;
     alt: string;

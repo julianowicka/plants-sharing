@@ -2,8 +2,8 @@ import '@/app/ui/global.css';
 import { montserrat } from '@/app/ui/fonts';
 import SideNav from '../ui/dashboard/sidenav';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../api/auth/[...nextauth]/route';
 import { redirect } from 'next/navigation';
+import { authOptions } from '../api/auth/[...nextauth]/authOptions';
 
 
 export default async function RootLayout({

@@ -14,7 +14,7 @@ import { RemovePlantButton } from "./remove-plant-button";
 interface Props {
   handleAddPlant?: () => Promise<void>;
   onImageUpload?: ((image: File) => Promise<void>) | undefined;
-  imageBytes?: Uint8Array<ArrayBufferLike> | null;
+  imageBytes?: Uint8Array | null;
   plant: PlantDetailsModel;
   handleAddComment?: (comment: string) => Promise<void>;
   comments?: Comment[];

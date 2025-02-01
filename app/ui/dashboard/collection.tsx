@@ -15,7 +15,7 @@ interface CollectionCardProps {
   userImage?: string;
   defaultImage: string;
   plantName: string;
-  imageBytes?: Uint8Array<ArrayBufferLike> | null;
+  imageBytes?: Uint8Array | null;
 }
 
 function CollectionCard({
