@@ -11,6 +11,27 @@ import { ExchangePlantButton } from "./exchange-plant-button";
 import CallButton from "./call-button";
 import { RemovePlantButton } from "./remove-plant-button";
 
+const translate = (key: string): string => {
+  switch (key) {
+    case "ACID":
+      return "Kwaśna";
+    case "UNIVERSAL":
+      return "Uniwersalna";
+    case "MUCH_LIGHT":
+      return "Duże nasłonecznienie";
+    case "LOW_LIGHT":
+      return "Małe nasłonecznienie";
+    case "MEDIUM_LIGHT":
+      return "Średnie nasłonecznienie";
+    case "SUCCULENT":
+      return "Sukulentowa";
+    case "ORCHID":
+      return "Orchidowa";
+    default:
+      return key;
+  }
+};
+
 interface Props {
   handleAddPlant?: () => Promise<void>;
   onImageUpload?: ((image: File) => Promise<void>) | undefined;
@@ -67,13 +88,13 @@ export const PlantDetailsComponent = (props: Props) => {
             </div>
 
             <div className="mt-[35px]">
-              <h2 className=" text-sm font-bold font-['Montserrat']">Trudność uprawy: {difficulty}</h2>
+              <h2 className=" text-sm font-bold font-['Montserrat']">Trudność uprawy: {difficulty}/10</h2>
             </div>
             <div className="mt-[35px]">
-              <h2 className="text-sm font-bold font-['Montserrat']">Gleba: {soilType}</h2>
+              <h2 className="text-sm font-bold font-['Montserrat']">Gleba: {translate(soilType)}</h2>
             </div>
             <div className="mt-[35px]">
-              <h2 className="text-sm font-bold font-['Montserrat']">Nasłonecznienie: {lightExposure}</h2>
+              <h2 className="text-sm font-bold font-['Montserrat']">Nasłonecznienie: {translate(lightExposure)}</h2>
             </div>
 
             <div className="mt-[34px]">
