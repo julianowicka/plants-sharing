@@ -6,7 +6,7 @@ export default function PlantDiscoveryLogo() {
     <div
       className={`${montserrat.className} flex flex-row items-center leading-none text-white`}
     >
-      <BugAntIcon className="h-12 w-12 rotate-[15deg]" />
+      <BugAntIcon className="w-[50px] w-[50px] rotate-[15deg]" />
       <p className="text-[24px]">Plant Discovery</p>
     </div>
   );
