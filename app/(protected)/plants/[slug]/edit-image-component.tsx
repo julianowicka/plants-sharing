@@ -1,8 +1,6 @@
 "use client";
 
-import React, { useState, ChangeEvent } from "react";
-import Image from "next/image";
-// Import the Material UI Camera icon
+import React, { ChangeEvent } from "react";
 import { CameraAlt } from "@mui/icons-material";
 
 interface EditImageProps {

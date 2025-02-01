@@ -1,118 +1,213 @@
-import bcrypt from 'bcrypt';
-import { db } from '@vercel/postgres';
-import { invoices, customers, revenue, users } from '../lib/placeholder-data';
-
-const client = await db.connect();
-
-async function seedUsers() {
-  await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
-  await client.sql`
-    CREATE TABLE IF NOT EXISTS users (
-      id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-      name VARCHAR(255) NOT NULL,
-      email TEXT NOT NULL UNIQUE,
-      password TEXT NOT NULL
-    );
-  `;
-
-  const insertedUsers = await Promise.all(
-    users.map(async (user) => {
-      const hashedPassword = await bcrypt.hash(user.password, 10);
-      return client.sql`
-        INSERT INTO users (id, name, email, password)
-        VALUES (${user.id}, ${user.name}, ${user.email}, ${hashedPassword})
-        ON CONFLICT (id) DO NOTHING;
-      `;
-    }),
-  );
-
-  return insertedUsers;
-}
-
-async function seedInvoices() {
-  await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
-
-  await client.sql`
-    CREATE TABLE IF NOT EXISTS invoices (
-      id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-      customer_id UUID NOT NULL,
-      amount INT NOT NULL,
-      status VARCHAR(255) NOT NULL,
-      date DATE NOT NULL
-    );
-  `;
-
-  const insertedInvoices = await Promise.all(
-    invoices.map(
-      (invoice) => client.sql`
-        INSERT INTO invoices (customer_id, amount, status, date)
-        VALUES (${invoice.customer_id}, ${invoice.amount}, ${invoice.status}, ${invoice.date})
-        ON CONFLICT (id) DO NOTHING;
-      `,
-    ),
-  );
-
-  return insertedInvoices;
-}
-
-async function seedCustomers() {
-  await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
-
-  await client.sql`
-    CREATE TABLE IF NOT EXISTS customers (
-      id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-      name VARCHAR(255) NOT NULL,
-      email VARCHAR(255) NOT NULL,
-      image_url VARCHAR(255) NOT NULL
-    );
-  `;
-
-  const insertedCustomers = await Promise.all(
-    customers.map(
-      (customer) => client.sql`
-        INSERT INTO customers (id, name, email, image_url)
-        VALUES (${customer.id}, ${customer.name}, ${customer.email}, ${customer.image_url})
-        ON CONFLICT (id) DO NOTHING;
-      `,
-    ),
-  );
-
-  return insertedCustomers;
-}
-
-async function seedRevenue() {
-  await client.sql`
-    CREATE TABLE IF NOT EXISTS revenue (
-      month VARCHAR(4) NOT NULL UNIQUE,
-      revenue INT NOT NULL
-    );
-  `;
-
-  const insertedRevenue = await Promise.all(
-    revenue.map(
-      (rev) => client.sql`
-        INSERT INTO revenue (month, revenue)
-        VALUES (${rev.month}, ${rev.revenue})
-        ON CONFLICT (month) DO NOTHING;
-      `,
-    ),
-  );
-
-  return insertedRevenue;
-}
+import { db } from "@/app/db";
+import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    await client.sql`BEGIN`;
-    await seedUsers();
-    await seedCustomers();
-    await seedInvoices();
-    await seedRevenue();
-    await client.sql`COMMIT`;
+    await db.plant.create({
+      data: {
+        name: 'Pieniążek',
+        slug: 'pieniazek',
+        difficulty: 4,
+        imageSrc: 'https://images.unsplash.com/photo-1593691509543-c55fb32e8a82',
+        lightExposure: 'MEDIUM_LIGHT',
+        soilType: 'UNIVERSAL',
+        description:
+          'Roślina doniczkowa znana z okrągłych liści przypominających monety. Łatwa w uprawie.',
+        wateringInterval: 7,
+      },
+    });
 
-    return Response.json({ message: 'Database seeded successfully' });
+    await db.plant.create({
+      data: {
+        name: 'Aaronia',
+        slug: 'aaronia',
+        difficulty: 6,
+        imageSrc:
+          'https://haft-wzory.pl/wp-content/uploads/2018/10/kwiatek.jpg',
+        lightExposure: 'MUCH_LIGHT',
+        soilType: 'ACID',
+        description:
+          'Dolorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem.',
+        wateringInterval: 1,
+      },
+    });
+
+    await db.plant.create({
+      data: {
+        name: 'Aloes',
+        slug: 'aloes',
+        difficulty: 3,
+        imageSrc:
+          'https://images.unsplash.com/photo-1596547609652-9cf5d8c10b80',
+        lightExposure: 'MUCH_LIGHT',
+        soilType: 'SUCCULENT',
+        description:
+          'Roślina sukulent o właściwościach leczniczych. Wymaga małej ilości wody.',
+        wateringInterval: 14,
+      },
+    });
+
+    await db.plant.create({
+      data: {
+        name: 'Pilea',
+        slug: 'pilea',
+        difficulty: 2,
+        imageSrc:
+          'https://images.unsplash.com/photo-1606058733902-ca9c19057aa1',
+        lightExposure: 'MEDIUM_LIGHT',
+        soilType: 'UNIVERSAL',
+        description:
+          'Popularna roślina doniczkowa o okrągłych liściach. Idealna dla początkujących.',
+        wateringInterval: 7,
+      },
+    });
+
+    await db.plant.create({
+      data: {
+        name: 'Monstera',
+        slug: 'monstera',
+        difficulty: 4,
+        imageSrc:
+          'https://images.unsplash.com/photo-1614594975525-e45190c55d0b',
+        lightExposure: 'MEDIUM_LIGHT',
+        soilType: 'UNIVERSAL',
+        description:
+          'Popularna roślina o charakterystycznych dziurawych liściach. Może osiągać duże rozmiary.',
+        wateringInterval: 7,
+      },
+    });
+
+    await db.plant.create({
+      data: {
+        name: 'Fikus',
+        slug: 'fikus',
+        difficulty: 5,
+        imageSrc:
+          'https://images.unsplash.com/photo-1615213612138-4d1195b1c0e8',
+        lightExposure: 'MUCH_LIGHT',
+        soilType: 'UNIVERSAL',
+        description:
+          'Drzewo doniczkowe o błyszczących liściach. Wymaga regularnej pielęgnacji.',
+        wateringInterval: 5,
+      },
+    });
+
+    await db.plant.create({
+      data: {
+        name: 'Paproć',
+        slug: 'paproc',
+        difficulty: 3,
+        imageSrc:
+          'https://images.unsplash.com/photo-1596438459194-f275f413d6ff',
+        lightExposure: 'LOW_LIGHT',
+        soilType: 'UNIVERSAL',
+        description:
+          'Roślina ceniąca zacienione miejsca. Wymaga wysokiej wilgotności powietrza.',
+        wateringInterval: 3,
+      },
+    });
+
+    await db.plant.create({
+      data: {
+        name: 'Bluszcz',
+        slug: 'bluszcz',
+        difficulty: 2,
+        imageSrc:
+          'https://images.unsplash.com/photo-1509423350716-97f9360b4e09',
+        lightExposure: 'LOW_LIGHT',
+        soilType: 'UNIVERSAL',
+        description:
+          'Pnącze o dekoracyjnych liściach. Może być uprawiane jako roślina zwisająca.',
+        wateringInterval: 5,
+      },
+    });
+
+    await db.plant.create({
+      data: {
+        name: 'Storczyk',
+        slug: 'storczyk',
+        difficulty: 7,
+        imageSrc:
+          'https://images.unsplash.com/photo-1524598961171-371f5ed62bd3',
+        lightExposure: 'MEDIUM_LIGHT',
+        soilType: 'ORCHID',
+        description:
+          'Elegancka roślina o przepięknych kwiatach. Wymaga specjalnej pielęgnacji i odpowiedniego podłoża dla storczyków.',
+        wateringInterval: 7,
+      },
+    });
+
+    await db.plant.create({
+      data: {
+        name: 'Zamiokulkas',
+        slug: 'zamiokulkas',
+        difficulty: 1,
+        imageSrc:
+          'https://images.unsplash.com/photo-1632207691143-0d50b9d84fed',
+        lightExposure: 'LOW_LIGHT',
+        soilType: 'UNIVERSAL',
+        description:
+          'Wyjątkowo wytrzymała roślina o błyszczących, ciemnozielonych liściach. Idealna dla zapominalskich, znosi długie okresy suszy.',
+        wateringInterval: 14,
+      },
+    });
+
+    await db.plant.create({
+      data: {
+        name: 'Skrzydłokwiat',
+        slug: 'skrzydlokwiat',
+        difficulty: 3,
+        imageSrc:
+          'https://images.unsplash.com/photo-1597305526414-f2476901083d',
+        lightExposure: 'LOW_LIGHT',
+        soilType: 'UNIVERSAL',
+        description:
+          'Popularna roślina o charakterystycznych białych kwiatach. Świetnie oczyszcza powietrze, lubi zraszanie.',
+        wateringInterval: 4,
+      },
+    });
+
+    await db.user.create({
+      data: {
+        email: "julia.nowickaa@gmail.com",
+        name: "Julia Nowicka",
+        password: "$2b$10$ziUEEpA28VJlTEybGo1s0OKOYySuTbHHlxM.UTFjoWTR9DXRFo7ae",
+      },
+    });
+
+    await db.user.create({
+      data: {
+        email: "test@example.com",
+        name: "Test Example",
+        password: "$2b$10$ziUEEpA28VJlTEybGo1s0OKOYySuTbHHlxM.UTFjoWTR9DXRFo7ae",
+      },
+    });
+
+    await db.user.create({
+      data: {
+        email: "test@test.com",
+        name: "Test Test",
+        password: "$2b$10$ziUEEpA28VJlTEybGo1s0OKOYySuTbHHlxM.UTFjoWTR9DXRFo7ae",
+      },
+    });
+
+    await db.user.create({
+      data: {
+        email: "admin",
+        name: "Admin",
+        password: "$2b$10$RDyYm4ASe.D7pBCmpX7k3Ov03v2IZ.6x0N1J4abcnrYQvmMkiAWE6",
+      },
+    });
+
+    return NextResponse.json({
+      message: 'Database seeded successfully',
+    });
   } catch (error) {
-    await client.sql`ROLLBACK`;
-    return Response.json({ error }, { status: 500 });
+  
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : "Unknown error" },
+      { status: 500 }
+    );
   }
+  
 }

@@ -1,6 +1,6 @@
 "use client";
+
 import { Card } from "@/app/ui/dashboard/cards";
-import { Alert, Snackbar } from "@mui/material";
 import { useState } from "react";
 import MySnackbar from "./my-snackbar";
 
@@ -20,13 +20,6 @@ export default function AddPlant(props: Props) {
     const handleClick = async () => {
         await handleAddPlant();
         setOpen(true);
-    };
-
-    const handleClose = (event: React.SyntheticEvent<any> | Event, reason: string) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setOpen(false);
     };
 
     return (

@@ -1,8 +1,6 @@
 'use client';
 
-
 import { IconButton, InputAdornment, styled } from "@mui/material";
-import FilterIcon from "./filter-icon";
 import SearchIcon from "./search-icon"
 import TextField from '@mui/material/TextField';
 
@@ -36,10 +34,12 @@ const CustomTextField = styled(TextField)({
     }
   },
 });
+
 interface Props {
   value: string;
   onChange: (value: string) => void;
 }
+
 export default function Search(props: Props) {
 
   return (
@@ -65,6 +65,5 @@ export default function Search(props: Props) {
         }}
       />
     </div>
-
   );
 }

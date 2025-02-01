@@ -17,10 +17,8 @@ export default function CallButton({ phoneNumber }: CallButtonProps) {
     if (!phoneNumber) return;
 
     if (!isNumberVisible) {
-      // FIRST CLICK: show the phone number
       setIsNumberVisible(true);
     } else {
-      // SECOND CLICK: actually call
       window.location.href = `tel:${phoneNumber}`;
     }
   };
@@ -59,7 +57,7 @@ export default function CallButton({ phoneNumber }: CallButtonProps) {
           style={{
             color: 'inherit',
             textDecoration: 'none',
-            pointerEvents: 'none', // So user can't click the link directly
+            pointerEvents: 'none',
           }}
         >
           {formatPhoneNumber(phoneNumber)}

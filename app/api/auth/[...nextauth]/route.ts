@@ -9,14 +9,7 @@ export async function authenticateUser(email: string, plainTextPassword: string)
      return null;
   }
 
-  console.log("user", user.password);
-  console.log("plainTextPassword", plainTextPassword);
-
-  const hashedPassword = await bcrypt.hash(plainTextPassword, 10);
-  console.log("hashedPassword", hashedPassword);
-
   const isValid = await bcrypt.compare(plainTextPassword, user.password);
-  console.log("isValid", isValid);
   if (!isValid) {
     return null;
   }

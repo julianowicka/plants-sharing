@@ -37,7 +37,6 @@ function CollectionCard({
         shadow-sm    
       "
     >
-      {/* Top section with the image */}
       <div className="w-[300px] h-[300px] bg-gray-50 flex items-center justify-center overflow-hidden">
         <ByteOrUrlImage
           url={imageToShow}
@@ -47,7 +46,6 @@ function CollectionCard({
         />
       </div>
 
-      {/* Plant name area */}
       <div className="p-2 text-center text-gray-700 font-medium">
         {plantName}
       </div>
@@ -79,8 +77,8 @@ export default function Collection({ plants, title }: Props) {
         navigation
         className="w-[100%]"
       >
-        {plants.map((plant, index) => (
-          <SwiperSlide key={index} style={{ width: '300px' }}>
+        {plants.map((plant) => (
+          <SwiperSlide key={plant.id} style={{ width: '300px' }}>
             <Link href={`/my-plants/${plant.id}`}>
               <CollectionCard
                 userImage={plant.imageSrc}

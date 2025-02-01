@@ -13,6 +13,11 @@ export default function PageMain() {
   });
 
   return (
-    <html><head></head><body></body></html>
+    <html>
+      <head>
+        <title>Plant Discovery</title>
+      </head>
+      <body></body>
+    </html>
   );
 }
