@@ -61,9 +61,7 @@ export const PlantDetailsComponent = (props: Props) => {
   const { name, description, imageSrc, difficulty, soilType, lightExposure, wateringInterval } = plant;
 
   return (
-    // scrollable container
     <div className="w-full relative overflow-y-auto  bg-[#e4f0fa]" style={{ height: "100vh" }}>
-      {/* Image section */}
       <div className="w-full h-[500px] max-h-[40vh] relative">
         <ByteOrUrlImage url={imageSrc} imageBytes={imageBytes} className="w-full h-[500px] max-h-[40vh] object-cover" alt={name} />
         <RemovePlantButton handleRemovePlant={handleRemovePlant} isMyPlant={isMyPlant} />
@@ -74,11 +72,9 @@ export const PlantDetailsComponent = (props: Props) => {
         <EditImage onUpload={onImageUpload} isMyPlant={isMyPlant} />
       </div>
 
-      {/* Content section */}
       <div className="w-full flex justify-center items-center">
         <div className="w-full max-w-[1000px]">
 
-          {/* Plant description */}
           <div className="px-[30px] pt-[35px] position:relative">
             <div className="flex items-start justify-between">
               <h1 className="text-[#364459] text-2xl font-bold font-['Montserrat']">
