@@ -581,6 +581,15 @@ export async function GET() {
       },
     });
 
+
+    await db.user.create({
+      data: {
+        email: "bartosz.ziemkiewicz",
+        name: "Bartosz Ziemkiewicz",
+        password: "$2b$10$RDyYm4ASe.D7pBCmpX7k3Ov03v2IZ.6x0N1J4abcnrYQvmMkiAWE6",
+      },
+    });
+
     return NextResponse.json({
       message: 'Database seeded successfully',
     });
