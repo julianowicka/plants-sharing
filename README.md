@@ -72,9 +72,21 @@ cp .env.example .env.local
 # Run database migrations
 pnpm migrate
 
+# Seed the database with initial data (plants + test users)
+curl http://localhost:3000/seed
+
 # Start development server
 pnpm dev
 ```
+
+### 🌱 Database Seeding
+
+The application includes a comprehensive seed script that populates the database with:
+- **50+ plant species** with detailed care information
+- **Test user accounts** for development and testing
+- **Complete plant catalog** with images, difficulty levels, and care schedules
+
+To seed your database, simply make a GET request to `/seed` endpoint after starting the development server.
 
 ### 📱 User Experience
 
