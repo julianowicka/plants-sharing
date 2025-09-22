@@ -53,6 +53,13 @@ This application demonstrates modern full-stack development practices using cutt
 - **API Routes**: RESTful endpoints for data operations
 - **Migration System**: Version-controlled database schema changes
 
+### 🧪 Testing
+
+End-to-end tests are available in a separate repository using Playwright:
+- **E2E Tests Repository**: [plants-sharing-e2e-test](https://github.com/julianowicka/plants-sharing-e2e-test)
+- **Test Framework**: Playwright with TypeScript
+- **Coverage**: Complete user journey testing including authentication, plant management, and exchange features
+
 ### 🚀 Getting Started
 
 ```bash
