@@ -1,6 +1,6 @@
 # Plant Discovery 🌱
 
-**Plant Discovery** to moja perełka, którą używam i samodzielnie rozwijam jako rozwinięcie mojej pracy dyplomowej inżynierskiej. Aplikacja łączy pasję do roślin z nowoczesnymi technologiami webowymi, tworząc społeczność miłośników roślin doniczkowych.
+**Plant Discovery** to moja perełka, którą używam i samodzielnie rozwijam jako kontynuacje mojej inżynierskiej pracy dyplomowej. Aplikacja łączy pasję do roślin z nowoczesnymi technologiami webowymi, tworząc kieszonkowy atlas dla miłośników roślin doniczkowych.
 
 ## About Plant Discovery
 
