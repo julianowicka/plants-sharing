@@ -123,3 +123,4 @@ The converted model integrates with the Next.js application via:
 
 See the main application README for integration details.
 
+
