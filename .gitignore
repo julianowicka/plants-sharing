@@ -34,3 +34,44 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ML artifacts
+ml/venv/
+ml/**/*.pyc
+ml/__pycache__/
+ml/*.keras
+ml/*.h5
+ml/*.ckpt
+ml/*.tflite
+ml/*_history.png
+ml/hybrid_houseplant_model/
+ml/hybrid_houseplant_model_web/
+ml/tmp/
+
+# Local notebooks
+*.ipynb
+*.ipynb_checkpoints/
+
+# Generated TFJS weights (keep model.json and class_names.txt)
+public/models/**/weights*.bin
+
+
+# ML artifacts
+ml/venv/
+ml/**/*.pyc
+ml/__pycache__/
+ml/*.keras
+ml/*.h5
+ml/*.ckpt
+ml/*.tflite
+ml/*_history.png
+ml/hybrid_houseplant_model/
+ml/hybrid_houseplant_model_web/
+ml/tmp/
+
+# Local notebooks
+*.ipynb
+*.ipynb_checkpoints/
+
+# Generated TFJS weights (keep model.json and class_names.txt)
+public/models/**/weights*.bin
