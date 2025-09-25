@@ -370,3 +370,4 @@ export function DiseaseDetection({ onBack }: { onBack: () => void }) {
 }
 
 
+
