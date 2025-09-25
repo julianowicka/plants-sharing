@@ -1,6 +1,6 @@
 import { db } from "@/app/db";
 import CredentialsProvider from "next-auth/providers/credentials";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 async function authenticateUser(email: string, plainTextPassword: string) {
     const user = await db.user.findUnique({ where: { email } });
@@ -17,6 +17,10 @@ async function authenticateUser(email: string, plainTextPassword: string) {
   }
 
 export const authOptions = {
+    secret: process.env.NEXTAUTH_SECRET || "your-secret-key-here",
+    pages: {
+      signIn: '/login',
+    },
     providers: [
       CredentialsProvider({
         name: "Credentials",
