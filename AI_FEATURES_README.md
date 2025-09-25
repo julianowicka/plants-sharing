@@ -1,6 +1,6 @@
 # AI funkcje w Plant Discovery (skrót)
 
-Zwięzłe podsumowanie funkcji AI w aplikacji oraz jak z nich korzystać.
+Podsumowanie funkcji AI w aplikacji oraz jak z nich korzystać.
 
 ## Funkcje
 
@@ -18,11 +18,7 @@ pnpm install
 2) Zmienne środowiskowe (`.env.local`):
 ```env
 NEXTAUTH_URL="http://localhost:3000"
-NEXTAUTH_SECRET="<tajny_klucz>"
-OPENAI_API_KEY="<opcjonalnie>"
-GOOGLE_CLOUD_VISION_API_KEY="<opcjonalnie>"
-TENSORFLOW_PLANT_ID_MODEL_URL="<opcjonalnie>"
-TENSORFLOW_DISEASE_MODEL_URL="<opcjonalnie>"
+
 ```
 
 3) Uruchomienie:
@@ -39,14 +35,13 @@ pnpm test
 
 ## Uwaga produkcyjna
 
-- Aktualnie detekcja chorób działa na mockach. Docelowo dodamy załadowanie modelu TFJS i preprocessing obrazów po stronie API.
-- Duże pliki wag TFJS (weights*.bin) są ignorowane w repo; trzymamy `model.json` i `class_names.txt`.
+- Aktualnie detekcja chorób działa na mockach. Docelowo jestem w trakcie dodania załadowania modelu TFJS i preprocessing obrazów po stronie API.
+- Duże pliki wag TFJS (weights*.bin) są ignorowane w repo; trzymam `model.json` i `class_names.txt`.
 
 ## Struktura (skrót)
 
 ```
 app/(protected)/ai-tools/
-app/api/ai/{plant-identification,chat,disease-detection}/route.ts
-tests/ai-tools.spec.ts
+
 ```
 
