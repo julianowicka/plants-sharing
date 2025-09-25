@@ -4,6 +4,7 @@ import {
   HomeIcon,
   ListBulletIcon,
   CalendarIcon,
+  SparklesIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -26,6 +27,11 @@ const links = [
     name: 'Kalendarz',
     href: '/calendar',
     icon: CalendarIcon,
+  },
+  {
+    name: 'AI Narzędzia',
+    href: '/ai-tools',
+    icon: SparklesIcon,
   }
 ];
 

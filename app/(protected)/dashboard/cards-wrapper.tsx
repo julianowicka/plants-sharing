@@ -4,7 +4,7 @@ import { Card } from "../../ui/dashboard/cards";
 
 export default function CardWrapper() {
   return (
-    <div className="grid gap-6 grid-cols-2 sm:grid-cols-4 mt-10 max-w-[1000px]">
+    <div className="grid gap-6 grid-cols-2 sm:grid-cols-5 mt-10 max-w-[1200px]">
       <Link href="/exchange" className="flex justify-center" >
         <Card title="Wymień" type="change" />
       </Link>
@@ -16,6 +16,9 @@ export default function CardWrapper() {
       </Link>
       <Link href="/plants" className="flex justify-center" >
         <Card title="Dodaj" type="add" />
+      </Link>
+      <Link href="/ai-tools" className="flex justify-center" >
+        <Card title="AI Doctor" type="ai" />
       </Link>
     </div>
   );

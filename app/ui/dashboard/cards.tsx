@@ -3,7 +3,7 @@ import { montserrat } from '@/app/ui/fonts';
 import ChangeIcon from './card-item/change-icon';
 import CatalogIcon from './card-item/catalog-icon';
 import CalendarIcon from './card-item/calendar-icon';
-import { PlusIcon } from '@heroicons/react/24/outline';
+import { PlusIcon, SparklesIcon } from '@heroicons/react/24/outline';
 import { IconButton } from '@mui/material';
 
 const AddIcon = () => {
@@ -12,17 +12,24 @@ const AddIcon = () => {
   </div>
 }
 
+const AIIcon = () => {
+  return <div className="w-8 h-8">
+    <SparklesIcon color='#40CEB9' />
+  </div>
+}
+
 const iconMap = {
   change: ChangeIcon,
   catalog: CatalogIcon,
   calendar: CalendarIcon,
   add: AddIcon,
+  ai: AIIcon,
 };
 
 
 interface Props {
   title: string;
-  type: 'change' | 'catalog' | 'calendar' | 'add';
+  type: 'change' | 'catalog' | 'calendar' | 'add' | 'ai';
   onClick?: () => void;
 }
 
