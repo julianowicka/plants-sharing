@@ -32,12 +32,14 @@ model UserPlant {
 }
 
 model User {
-  id       Int         @id @default(autoincrement())
-  email    String      @unique
-  name     String
-  password String      @default("")
-  plants   UserPlant[]
-  comments Comment[]
+  id           Int            @id @default(autoincrement())
+  email        String         @unique
+  name         String
+  password     String         @default("")
+  plants       UserPlant[]
+  comments     Comment[]
+  aiAnalyses   AIAnalysis[]
+  chatMessages ChatMessage[]
 }
 
 model Comment {
@@ -54,4 +56,24 @@ model ExchangeOffer {
   userPlant   UserPlant @relation(fields: [userPlantId], references: [id], onDelete: Cascade)
   userPlantId Int
   phone       String
+}
+
+model AIAnalysis {
+  id          Int      @id @default(autoincrement())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int
+  type        String   // 'plant-identification', 'disease-detection'
+  imageData   Bytes?   // Store the uploaded image
+  result      Json     // Store the AI analysis result
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ChatMessage {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  role      String   // 'user' or 'assistant'
+  content   String
+  createdAt DateTime @default(now())
 }
