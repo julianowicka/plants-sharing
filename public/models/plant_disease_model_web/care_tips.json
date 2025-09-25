@@ -1,0 +1,8 @@
+{
+  "Houseplant_Healthy": "Continue regular care routine. Monitor for any changes.",
+  "Houseplant_Overwatered": "Reduce watering frequency. Check drainage. Let soil dry between waterings.",
+  "Houseplant_Underwatered": "Increase watering frequency. Check soil moisture regularly.",
+  "Houseplant_LowLight": "Move to brighter location. Consider grow lights for indoor plants.",
+  "Houseplant_TooMuchLight": "Move to shadier location. Protect from direct sunlight.",
+  "Houseplant_NutrientDeficiency": "Fertilize with balanced plant food. Check soil pH."
+}
